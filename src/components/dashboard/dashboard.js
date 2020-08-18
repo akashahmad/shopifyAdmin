@@ -121,7 +121,7 @@ export default () => {
                                 </div>
                             </div>
                             <div>
-                                <h3 className="title is-3">${sales}</h3>
+                                <h3 className="title is-3">${sales ? sales.toFixed(2) : 0}</h3>
                             </div>
                             <div className="has-padding-top-20">
                                 <LineChart data={{ "2017-05-13": 6, "2017-05-14": 1 }} />
