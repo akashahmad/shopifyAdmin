@@ -1,0 +1,18 @@
+.body{
+    height: 100%;
+}
+.padding-0{
+    padding: 0px!important;
+}
+.backg-sideNav{
+    background-color: #1f263e;
+}
+.has-margin-0{
+    margin: 0px!important;
+}
+.has-padding-0{
+    padding: 0px!important;
+}
+.has-height-100{
+    height: 100%;
+}
