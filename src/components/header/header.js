@@ -8,22 +8,22 @@ export default () => {
                     <div className="level">
                         {/* hamburger */}
                         <div className="level-left">
-                            <img src={require("../../assets/images/hamburger.png")} width="25px" />
+                            <img src={require("../../assets/images/hamburger.png")} width="25px" alt=""/>
                         </div>
                         <div className="level-right">
                             {/* input */}
                             <div>
-                                <input class="input is-rounded" type="text" placeholder="Search" />
+                                <input className="input is-rounded" type="text" placeholder="Search" />
                             </div>
                             {/* setting */}
                             <div className="has-padding-left-10 has-padding-right-10">
-                                <img src={require("../../assets/images/Setting.png")} width="35px" />
+                                <img src={require("../../assets/images/Setting.png")} width="35px" alt=""/>
                             </div>
                             <div>
-                                <img src={require("../../assets/images/bell.png")} width="30px" />
+                                <img src={require("../../assets/images/bell.png")} width="30px" alt=""/>
                             </div>
                             <div className="has-padding-left-10 has-padding-right-10">
-                                <img src={require("../../assets/images/bitmap.png")} />
+                                <img src={require("../../assets/images/bitmap.png")} alt=""/>
                             </div>
                         </div>
                     </div>
