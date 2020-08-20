@@ -2,7 +2,9 @@ import React from 'react';
 import { LineChart } from 'react-chartkick'
 import 'chart.js'
 export default (props) => {
+
     let { title, displayValue, data } = props;
+
     return <div className="box ">
         <div className="level">
             <div className="level-left">
@@ -15,8 +17,8 @@ export default (props) => {
         <div>
             <h3 className="title is-3">{displayValue}</h3>
         </div>
-        <div className="has-padding-top-20 columns is-multiline is-mobile is-desktop" >
-            <div className="column is-10-desktop ">
+        <div className="has-padding-top-20 columns is-multiline is-mobile is-desktop">
+            <div className="column is-12 ">
                 <LineChart data={data} />
             </div>
         </div>
