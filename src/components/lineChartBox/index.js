@@ -18,7 +18,7 @@ export default (props) => {
             <h3 className="title is-3">{displayValue}</h3>
         </div>
         <div className="has-padding-top-20 columns is-multiline is-mobile is-desktop">
-            <div className="column is-12 ">
+            <div className="column is-12  ">
                 <LineChart data={data} />
             </div>
         </div>
