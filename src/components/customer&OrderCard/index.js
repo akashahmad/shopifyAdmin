@@ -1,6 +1,6 @@
 import React from 'react';
 export default (props) => {
-    let {name, city} = props;
+    let {name, value, type} = props;
     return <div>
         <div className="level has-padding-top-5 has-padding-bottom-5 flex-row">
             {/* left */}
@@ -10,7 +10,7 @@ export default (props) => {
                 </div>
                 <div className=" has-padding-left-10 ">
                     <h5 className="title is-5 has-margin-0">{name}</h5>
-                    <h6>City {city}</h6>
+                    <h6>{type === "customer" ? `City ${value}` : `$${value}`}</h6>
                 </div>
             </div>
             {/* right */}
