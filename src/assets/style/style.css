@@ -16,3 +16,10 @@
 .has-height-100{
     height: 100%;
 }
+.animate {
+    transition: all 5s ease-in-out;
+    -webkit-transition: all 5s ease-in-out;
+    -moz-transition: all 5s ease-in-out;
+    -o-transition: all 5s ease-in-out;
+    -ms-transition: all 5s ease-out;
+  }

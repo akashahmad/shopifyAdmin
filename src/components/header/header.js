@@ -1,14 +1,18 @@
 import React from 'react'
 
 export default (props) => {
-    let { setToggle, toggle } = props
+    
+    let { setToggle, toggle } = props;
+
     return (
         <>
             <div className="container-fluid has-padding-top-15">
                 <div className="has-background-white box">
                     <div className="level">
                         {/* hamburger */}
-                        <div className="level-left" onClick={()=>setToggle(!toggle)}>
+                        <div className="level-left has-cursor-pointer has-padding-left-20" onClick={() =>{
+                            setToggle(!toggle);
+                        }}>
                             <img src={require("../../assets/images/hamburger.png")} width="25px" alt="" />
                         </div>
                         <div className="level-right">

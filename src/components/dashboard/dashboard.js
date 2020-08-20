@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import ZingChart from '../zingChart';
 import LineChartBox from '../lineChartBox';
 import Customer from '../customerCart';
@@ -12,7 +12,8 @@ export default () => {
     const [earn, setEarn] = useState();
     const [customers, setCustomers] = useState([]);
     const [products, setProducts] = useState([]);
-    const [lineChartData] = useState({"2020-06-27": 1, "2020-06-26": 2, "2020-06-25": 3, "2020-06-24": 2})
+    const [lineChartData] = useState({ "2020-06-27": 1, "2020-06-26": 2, "2020-06-25": 3, "2020-06-24": 2 })
+
     useEffect(() => {
         axios.get(Config.baseUrl)
             .then(res => {
@@ -61,24 +62,26 @@ export default () => {
 
 
     return (
-        <div className="container-fluid has-background-grey-lighter">
-            <div className="has-padding-top-20 has-padding-bottom-20 ">
+        <div className="container-fluid has-background-grey-lighter has-padding-left-5">
+            <div className="has-padding-top-20 has-padding-bottom-20">
                 {/* heading */}
-                <div className="has-padding-left-30 has-padding-right-30">
+                <div className="has-padding-left-30 has-padding-right-20">
                     <div >
                         <h3 className="title is-3">Dashboard</h3>
                     </div>
                     {/* graphs main Div */}
-                    <div className="has-padding-top-20 has-padding-bottom-20 flex-row">
-                        <LineChartBox title={"Sales"} displayValue={`$${sales ? sales.toFixed(2) : 0}`}
-                                      data={lineChartData}/>
-                        <div className="has-padding-left-10 ">
-                            <LineChartBox title={"Earn Money"} displayValue={`$${earn ? earn.toFixed(2) : 0}`}
-                                          data={lineChartData}/>
+                    <div className="has-padding-top-20 has-padding-bottom-20 flex-row  columns is-multiline is-mobile is-desktop">
+                        <div className="column is-one-third">
+                            <LineChartBox title={"Sales"} displayValue={`$${sales ? sales.toFixed(2) : 0}`}
+                                data={lineChartData} />
                         </div>
-                        <div className="has-padding-left-10 ">
+                        <div className="column is-one-third">
+                            <LineChartBox title={"Earn Money"} displayValue={`$${earn ? earn.toFixed(2) : 0}`}
+                                data={lineChartData} />
+                        </div>
+                        <div className="column is-one-third">
                             <LineChartBox title={"Orders"} displayValue={`${ordersCount ? ordersCount : 0}`}
-                                          data={lineChartData}/>
+                                data={lineChartData} />
                         </div>
                     </div>
                     {/* below charts */}
@@ -91,7 +94,7 @@ export default () => {
                                     <h5 className="title is-5">Customers</h5>
                                 </div>
                                 {customers && customers.map((sin, index) => <Customer key={index} name={sin.name}
-                                                                                      city={sin.city}/>)}
+                                    city={sin.city} />)}
                             </div>
                         </div>
                         {/* right side  */}
@@ -103,12 +106,12 @@ export default () => {
                                     <h5 className="title is-5">Orders</h5>
                                 </div>
                                 {products && products.map((sin, index) => <Order key={index} title={sin.title}
-                                                                                 price={sin.price}/>)}
+                                    price={sin.price} />)}
                             </div>
                         </div>
                     </div>
                     {/* ZingChart */}
-                    <ZingChart/>
+                    <ZingChart />
                 </div>
             </div>
         </div>
