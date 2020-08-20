@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ZingChart from '../zingChart';
 import LineChartBox from '../lineChartBox';
-import CustomerAndOrder from '../customer&OrderCard';
+import CustomerAndOrder from '../listCard';
 import axios from 'axios'
 import Config from '../../config'
 
