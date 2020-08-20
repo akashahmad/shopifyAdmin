@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ZingChart from '../zingChart';
 import LineChartBox from '../lineChartBox';
-import Customer from '../customerCart';
-import Order from '../orderCard';
+import CustomerAndOrder from '../customer&OrderCard';
 import axios from 'axios'
 import Config from '../../config'
 
@@ -93,8 +92,8 @@ export default () => {
                                 <div>
                                     <h5 className="title is-5">Customers</h5>
                                 </div>
-                                {customers && customers.map((sin, index) => <Customer key={index} name={sin.name}
-                                    city={sin.city} />)}
+                                {customers && customers.map((sin, index) => <CustomerAndOrder type="customer" key={index} name={sin.name}
+                                    value={sin.city} />)}
                             </div>
                         </div>
                         {/* right side  */}
@@ -105,8 +104,8 @@ export default () => {
                                 <div>
                                     <h5 className="title is-5">Orders</h5>
                                 </div>
-                                {products && products.map((sin, index) => <Order key={index} title={sin.title}
-                                    price={sin.price} />)}
+                                {products && products.map((sin, index) => <CustomerAndOrder type="order" key={index} name={sin.title}
+                                    value={sin.price} />)}
                             </div>
                         </div>
                     </div>
