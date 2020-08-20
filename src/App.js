@@ -5,9 +5,9 @@ import 'bulma/css/bulma.css'
 import './assets/style/style.css'
 
 export default () => {
-  return (
-    <>
-      <Home />
-    </>
-  );
+    return (
+        <>
+        <Home />
+        </>
+    );
 }

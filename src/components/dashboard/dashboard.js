@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import 'zingchart/es6';
-import ZingChart from 'zingchart-react';
-// EXPLICITLY IMPORT MODULE
-import 'zingchart-react/dist/modules/zingchart-depth.min.js';
-import { LineChart } from 'react-chartkick'
-import 'chart.js'
+import React, {useEffect, useState} from 'react'
+import ZingChart from '../zingChart';
+import LineChartBox from '../lineChartBox';
+import Customer from '../customerCart';
+import Order from '../orderCard';
 import axios from 'axios'
 import Config from '../../config'
 
 export default () => {
-    const [ordersCount, setOrdersCount] = useState()
-    const [sales, setsales] = useState()
-    const [earn, setEarn] = useState()
-    const [customers, setCustomers] = useState([])
-    const [products, setProducts] = useState([])
+    const [ordersCount, setOrdersCount] = useState();
+    const [sales, setsales] = useState();
+    const [earn, setEarn] = useState();
+    const [customers, setCustomers] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [lineChartData] = useState({"2020-06-27": 1, "2020-06-26": 2, "2020-06-25": 3, "2020-06-24": 2})
     useEffect(() => {
         axios.get(Config.baseUrl)
             .then(res => {
@@ -27,8 +26,17 @@ export default () => {
                     initinalSale = parseFloat(order.total_price) + parseFloat(initinalSale);
                     initinalEarn = parseFloat(order.subtotal_price) + parseFloat(initinalEarn);
                     initialOrdersCount = initialOrdersCount + 1;
-                    initialcustomer.push({ id: order.customer.id, name: order.customer.first_name, city: order.customer.default_address.city })
-                    initialProducts.push({ id: order.line_items[0].id, title: order.line_items[0].title, quatity: order.line_items[0].quantity, price: order.line_items[0].price })
+                    initialcustomer.push({
+                        id: order.customer.id,
+                        name: order.customer.first_name,
+                        city: order.customer.default_address.city
+                    })
+                    initialProducts.push({
+                        id: order.line_items[0].id,
+                        title: order.line_items[0].title,
+                        quatity: order.line_items[0].quantity,
+                        price: order.line_items[0].price
+                    })
                 });
                 let uniqueCustomer = distinct(initialcustomer, "id")
                 setProducts(initialProducts)
@@ -50,55 +58,7 @@ export default () => {
         }
         return output
     };
-    let config = {
-        "backgroundColor": "transparent",
-        type: 'bar',
-        series: [
-            {
-                values: [
-                    20,
-                    40,
-                    25,
-                    50,
-                    15,
-                    45,
-                    33,
-                    34
-                ]
-            }, {
-                values: [
-                    5,
-                    30,
-                    21,
-                    18,
-                    59,
-                    50,
-                    28,
-                    33
-                ]
-            }, {
-                values: [
-                    30,
-                    5,
-                    18,
-                    21,
-                    33,
-                    41,
-                    29,
-                    15
-                ]
-            }
-        ],
-        'scale-y': {
-            visible: false
-        },
-        'scale-x': {
-            visible: false
-        },
-        tooltip: {
-            text: 'value: %v'
-        }
-    }
+
 
     return (
         <div className="container-fluid has-background-grey-lighter">
@@ -110,60 +70,15 @@ export default () => {
                     </div>
                     {/* graphs main Div */}
                     <div className="has-padding-top-20 has-padding-bottom-20 flex-row">
-                        {/* box 1 */}
-                        <div className="box ">
-                            <div className="level">
-                                <div className="level-left">
-                                    <h5 className="title is-5">Sales</h5>
-                                </div>
-                                <div className="level-right">
-                                    <h6 className="title is-6 has-text-grey-light">View</h6>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 className="title is-3">${sales ? sales.toFixed(2) : 0}</h3>
-                            </div>
-                            <div className="has-padding-top-20">
-                                <LineChart data={{ "2017-05-13": 6, "2017-05-14": 1 }} />
-                            </div>
-                        </div>
-                        {/* box 2 */}
+                        <LineChartBox title={"Sales"} displayValue={`$${sales ? sales.toFixed(2) : 0}`}
+                                      data={lineChartData}/>
                         <div className="has-padding-left-10 ">
-                            <div className="box">
-                                <div className="level">
-                                    <div className="level-left">
-                                        <h5 className="title is-5">Earn Money</h5>
-                                    </div>
-                                    <div className="level-right">
-                                        <h6 className="title is-6 has-text-grey-light">View</h6>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 className="title is-3">${earn}</h3>
-                                </div>
-                                <div className="has-padding-top-20">
-                                    <LineChart data={{ "2017-05-13": 2, "2017-05-14": 5 }} />
-                                </div>
-                            </div>
+                            <LineChartBox title={"Earn Money"} displayValue={`$${earn ? earn.toFixed(2) : 0}`}
+                                          data={lineChartData}/>
                         </div>
-                        {/* box 3 */}
                         <div className="has-padding-left-10 ">
-                            <div className="box">
-                                <div className="level">
-                                    <div className="level-left">
-                                        <h5 className="title is-5">Orders</h5>
-                                    </div>
-                                    <div className="level-right">
-                                        <h6 className="title is-6 has-text-grey-light">View</h6>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 className="title is-3">{ordersCount}</h3>
-                                </div>
-                                <div className="has-padding-top-20">
-                                    <LineChart data={{ "2017-05-13": 4, "2017-05-14": 9 }} />
-                                </div>
-                            </div>
+                            <LineChartBox title={"Orders"} displayValue={`${ordersCount ? ordersCount : 0}`}
+                                          data={lineChartData}/>
                         </div>
                     </div>
                     {/* below charts */}
@@ -175,27 +90,8 @@ export default () => {
                                 <div>
                                     <h5 className="title is-5">Customers</h5>
                                 </div>
-                                {customers && customers.map((sin, index) => <div key={index}>
-                                    <div className="level has-padding-top-5 has-padding-bottom-5 flex-row">
-                                        {/* left */}
-                                        <div className="level-left">
-                                            <div>
-                                                <img src={require("../../assets/images/bitmap.png")} alt="" />
-                                            </div>
-                                            <div className=" has-padding-left-10 ">
-                                                <h5 className="title is-5 has-margin-0">{sin.name}</h5>
-                                                <h6>City {sin.city}</h6>
-                                            </div>
-                                        </div>
-                                        {/* right */}
-                                        <div className="level-right ">
-                                            <div className="has-padding-right-20">
-                                                <h6 className="title is-6 has-text-info has-cursor-pointer"><u>View Profile</u></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr></hr>
-                                </div>)}
+                                {customers && customers.map((sin, index) => <Customer key={index} name={sin.name}
+                                                                                      city={sin.city}/>)}
                             </div>
                         </div>
                         {/* right side  */}
@@ -206,35 +102,13 @@ export default () => {
                                 <div>
                                     <h5 className="title is-5">Orders</h5>
                                 </div>
-                                {products && products.map((sin, index) => <div key={index}>
-                                    <div className="level has-padding-top-5 has-padding-bottom-5 flex-row">
-                                        {/* left */}
-                                        <div className="level-left">
-                                            <div>
-                                                <img src={require("../../assets/images/product-placeholder.jpeg")} alt="" width="50" />
-                                            </div>
-                                            <div className=" has-padding-left-10 ">
-                                                <h5 className="title is-5 has-margin-0">{sin.title}</h5>
-                                                <h6>price{sin.price}</h6>
-                                            </div>
-                                        </div>
-                                        {/* right */}
-                                        <div className="level-right ">
-                                            <div className="has-padding-right-20">
-                                                <h6 className="title is-6 has-text-info has-cursor-pointer"><u>View Profile</u></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr></hr>
-                                </div>)}
+                                {products && products.map((sin, index) => <Order key={index} title={sin.title}
+                                                                                 price={sin.price}/>)}
                             </div>
                         </div>
                     </div>
-
-                    {/* below data */}
-                    <div className="box">
-                        <ZingChart data={config} />
-                    </div>
+                    {/* ZingChart */}
+                    <ZingChart/>
                 </div>
             </div>
         </div>
