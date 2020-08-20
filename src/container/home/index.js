@@ -1,20 +1,10 @@
 import React from 'react'
-import Header from '../../components/header/header'
-import Sidenav from '../../components/sidenav/sidenav'
+import Layout from '../../components/layout'
 import Dashboard from '../../components/dashboard/dashboard'
-
-export default () => {
+export default (props) => {
     return (
-        <>
-            <div className="columns is-flex ">
-                <div className="column padding-0 is-one-fifth backg-sideNav">
-                    <Sidenav />
-                </div>
-                <div className="is-full-width">
-                    <Header />
-                    <Dashboard/>
-                </div>
-            </div>
-        </>
+        <Layout>
+            <Dashboard />
+        </Layout>
     );
 }
